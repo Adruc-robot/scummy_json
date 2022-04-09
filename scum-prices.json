@@ -1,0 +1,81 @@
+{
+	"economy-override":
+	{
+		"enable-economy" : "1",
+		"economy-reset-time-hours" : "-1.0",
+		"prices-randomization-time-hours" : "-1.0",
+		"fully-restock-tradeable-hours" : "2.0",
+		"trader-funds-change-rate-per-hour-multiplier" : "1.0",
+		"traders-unlimited-funds" : "0",
+		"limited-tradeables" :
+		{
+			"limited-vehicles":
+			[
+				{"vehicle-group" : "VehicleSpawnGroup.PickupTruck", "vehicle-group-max-amount" : "14"},
+				{"vehicle-group" : "VehicleSpawnGroup.Quad", "vehicle-group-max-amount" : "8"},
+				{"vehicle-group" : "VehicleSpawnGroup.SUV", "vehicle-group-max-amount" : "14"},
+				{"vehicle-group" : "VehicleSpawnGroup.Tractor", "vehicle-group-max-amount" : "9"},
+				{"vehicle-group" : "VehicleSpawnGroup.Wheelbarrow", "vehicle-group-max-amount" : "10"},
+				{"vehicle-group" : "VehicleSpawnGroup.Motorboat", "vehicle-group-max-amount" : "10"},
+				{"vehicle-group" : "VehicleSpawnGroup.SUP", "vehicle-group-max-amount" : "5"},
+				{"vehicle-group" : "VehicleSpawnGroup.Bicycle", "vehicle-group-max-amount" : "10"},
+				{"vehicle-group" : "VehicleSpawnGroup.Dirtbike", "vehicle-group-max-amount" : "5"},
+				{"vehicle-group" : "VehicleSpawnGroup.CruiserBike", "vehicle-group-max-amount" : "5"},
+				{"vehicle-group" : "VehicleSpawnGroup.Sportbike", "vehicle-group-max-amount" : "5"}
+			]
+		},
+		"traders" :
+		{ 
+			"A_0_Armory": 
+			[
+				{"tradeable-code" : "BP_Frag_Grenade", "base-purchase-price" : "-1", "base-sell-price" : "-1", "delta-price" : "-1.0", "can-be-purchased" : "default"},
+				{"tradeable-code" : "BP_Weapon_AK47", "base-purchase-price" : "-1", "base-sell-price" : "-1", "delta-price" : "-1.0", "can-be-purchased" : "default"}
+			],
+			"A_0_BoatShop":
+			[
+			],
+			"A_0_Mechanic":
+			[
+			],
+			"A_0_Trader":
+			[
+			],
+			"B_4_Armory":
+			[
+			],
+			"B_4_BoatShop":
+			[
+			],
+			"B_4_Mechanic":
+			[
+			],
+			"B_4_Trader":
+			[
+			],
+			"C_2_Armory":
+			[
+			],
+			"C_2_BoatShop":
+			[
+			],
+			"C_2_Mechanic":
+			[
+			],
+			"C_2_Trader":
+			[
+			],
+			"Z_3_Armory":
+			[
+			],
+			"Z_3_BoatShop":
+			[
+			],
+			"Z_3_Mechanic":
+			[
+			],
+			"Z_3_Trader":
+			[
+			]
+		}	
+	}
+}
