@@ -9,22 +9,11 @@ const data = new Promise((resolve, reject) => {
 function whatIs(obj,parentElem = null) {
   let testValue = Object.prototype.toString.call(obj)
   if (testValue === "[object Array]") {
-    //do things for arrays
     processArray(obj,parentElem) 
   } else if (testValue === "[object Object]") {
-    /*//do things for objects - create the parent div
-    let parentDiv = document.createElement("div")
-    //if parentElem is null, append to body, otherwise, append to parentElem
-    if (parentElem == null) {
-      document.body.appendChild(parentDiv)
-    } else {
-      parentElem.appendChild(parentDiv)
-    }
-    processObject(obj,parentDiv)*/
     //each object corresponds to a list - create the ul
     let objUL = document.createElement("ul")
     //if parentElem is null, append to body, else append to parentElem
-    //console.log(parentElem)
     if (parentElem == null) {
       document.body.appendChild(objUL)
     } else {
@@ -34,9 +23,6 @@ function whatIs(obj,parentElem = null) {
     processObject(obj, objUL)
 
   } else {
-    //easy case - stick the value into the span
-    //parentElem.innerText = obj
-
     //create a span for the value, stick it up in there, then append to parentElem
     let valSpan = document.createElement("span")
     valSpan.innerText = obj
@@ -45,8 +31,8 @@ function whatIs(obj,parentElem = null) {
 }
 function processArray(obj,parentElem = null) {
   for (let i = 0; i<obj.length; i++) {
+    //I think each element of the array is going to consist of a an object, so 
     whatIs(obj[i], parentElem)
-    //console.log(obj[i])
   }
 }
 
