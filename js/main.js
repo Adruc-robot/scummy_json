@@ -1,10 +1,69 @@
+let idCount = 1
 const data = new Promise((resolve, reject) => {
     fetch('scum-prices.json')
       .then(response => response.json())
       .then(data => whatIs(data))
+      .then(data => setUpListeners())
       .catch(error => console.log(error));
 
 })
+
+function setUpListeners () {
+  setUpClickies()
+  setUpSync()
+}
+function buildJson() {
+  let JSONstring = ""
+  let theHTML = document.getElementById("ulID1")
+  for (let i = 0; i<theHTML.length; i++) {
+    
+  }
+}
+
+function setUpSync() {
+  document.querySelectorAll(".syncItem").forEach((item) => {
+    item.addEventListener("keyup", (event) => {
+      //this is probably overly complex, but want to synchronize the values between the input and span
+      //console.log(item.value)
+      item.parentElement.parentElement.querySelectorAll(".valueSpan")[0].innerText = item.value
+    })
+  })
+}
+
+function setUpClickies() {
+  document.querySelectorAll('.update').forEach((item) => {
+    item.addEventListener('click', (event) => {
+      updateValue(item)
+    });
+  });
+  document.querySelectorAll('.destroy').forEach((item) => {
+    item.addEventListener('click', (event) => {
+      destroyEntry(item)
+    });
+  });
+}
+
+function updateValue(x) {
+  if (x.classList.contains("on")) {
+    x.classList.remove("on")
+    x.classList.add("off")
+    //need to remove hideItem from the span
+    x.parentElement.parentElement.querySelectorAll(".valueSpan")[0].classList.remove("hideItem")
+    //need to add hideItem to the inputItem
+    x.parentElement.parentElement.querySelectorAll(".inputItem")[0].classList.add("hideItem")
+
+  } else {
+    x.classList.remove("off")
+    x.classList.add("on")
+    //need to add hideItem to the span
+    x.parentElement.parentElement.querySelectorAll(".valueSpan")[0].classList.add("hideItem")
+    //need to remove hideItem 
+    x.parentElement.parentElement.querySelectorAll(".inputItem")[0].classList.remove("hideItem")
+  }
+}
+function destroyEntry(x) {
+  console.log(x)
+}
 
 function whatIs(obj,parentElem = null) {
   let testValue = Object.prototype.toString.call(obj)
@@ -13,6 +72,8 @@ function whatIs(obj,parentElem = null) {
   } else if (testValue === "[object Object]") {
     //each object corresponds to a list - create the ul
     let objUL = document.createElement("ul")
+    objUL.id = "ulID" + idCount
+    idCount++
     //if parentElem is null, append to body, else append to parentElem
     if (parentElem == null) {
       document.body.appendChild(objUL)
@@ -23,10 +84,22 @@ function whatIs(obj,parentElem = null) {
     processObject(obj, objUL)
 
   } else {
+    let valInput = document.createElement("input")
+    valInput.setAttribute("type","text")
+    valInput.setAttribute("value",obj)
+    valInput.classList.add("hideItem","inputItem","syncItem")
     //create a span for the value, stick it up in there, then append to parentElem
     let valSpan = document.createElement("span")
     valSpan.innerText = obj
+    valSpan.classList.add("valueSpan")
     parentElem.appendChild(valSpan)
+    parentElem.appendChild(valInput)
+    let pencilSpan = document.createElement("span")
+    pencilSpan.innerHTML = '<i class="bi bi-pencil-square update off"></i>'
+    parentElem.appendChild(pencilSpan)
+    let trashSpan = document.createElement("span")
+    trashSpan.innerHTML = '<i class="bi bi-trash3-fill destroy" style="color: red;"></i>'
+    parentElem.appendChild(trashSpan)
   }
 }
 function processArray(obj,parentElem = null) {
@@ -37,17 +110,6 @@ function processArray(obj,parentElem = null) {
 }
 
 function processObject(obj,parentElem) {
-  /*for (let [key, value] of Object.entries(obj)) {
-    //each key gets stuck in a span
-    let tKey = document.createElement("span")
-    tKey.innerText = key + ": "
-    parentElem.appendChild(tKey)
-    //create a span for the value - whatever it is
-    let valSpan = document.createElement("span")
-    parentElem.appendChild(valSpan)
-    //call whatIs again, but use value and valSpan
-    whatIs(value,valSpan)
-  }*/
   for (let [key, value] of Object.entries(obj)) {
     //key/value pairs are stored in an li, so first make the li
     let objLI = document.createElement("li")
@@ -109,19 +171,4 @@ function testing(obj) {
       }
     }
   }
-}
-
-function iterate_over_json(obj) {
-    for (let [key, value] of Object.entries(obj)) {
-        console.log(key, value);
-    }
-    /*for (let key in obj) {
-        let value = obj[key];
-        console.log(`value ${value} and key ${key}`)
-        if (obj.hasOwnProperty(key)) {
-          console.log(`Property ${key} is NOT from prototype chain`);
-        } else {
-          console.log(`Property ${key} is from prototype chain`);
-        }
-      }*/
 }

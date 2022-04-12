@@ -261,3 +261,13 @@ textarea {
   }
 }
 
+/* custom styles */
+.hideItem {
+  display: none;
+}
+.on {
+  color: green;
+}
+.off {
+  color: black;
+}
